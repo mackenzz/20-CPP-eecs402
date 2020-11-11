@@ -18,7 +18,7 @@ bool ImgOutput:: outputToImg()
     bool isValidFile = false;
     
     ofstream outFile;
-    outFile.open(outputFile);
+    outFile.open(outputFile.c_str());
     if (outFile.fail())
     {
         cout<< "You are trying to open the output file, but unable "
