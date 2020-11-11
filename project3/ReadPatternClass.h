@@ -23,7 +23,7 @@ private:
 public:
     int heightPattern;
     int widthPattern;
-    string **patternArray = new string *[ARRAY_INITIIAL_HEIGHT];
+    string **patternArray;
     
     // Constructor
     ReadPattern(
