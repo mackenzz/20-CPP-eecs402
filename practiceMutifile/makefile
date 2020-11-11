@@ -19,7 +19,7 @@ mainProj3.o: mainProj3.cpp ImgLoadClass.h ImgOutputClass.h ReadPatternClass.h Im
 	g++ -std=c++98 -Wall -c mainProj3.cpp -o mainProj3.o
 
 proj3.exe: ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o RectangleClass.o
-	g++ -std=c++98 -Wall -c ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o RectangleClass.o -o proj3.exe
+	g++ -std=c++98 -Wall -c mainProj3.o ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o RectangleClass.o -o proj3.exe
 
 clean:
 	rm -f *.o *.exe
