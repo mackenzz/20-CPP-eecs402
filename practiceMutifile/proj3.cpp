@@ -10,6 +10,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstring>
 #include "ImgLoadClass.h"
 #include "ImgOutputClass.h"
 #include "ReadPatternClass.h"
