@@ -10,7 +10,6 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <cstring>
 #include "ImgLoadClass.h"
 #include "ImgOutputClass.h"
 #include "ReadPatternClass.h"
@@ -52,10 +51,17 @@ int main(int argc, const char * argv[]) {
     string lowerRight_0;
     string lowerRight_1;
     string colorTrans;
+    int tmp1 = 0;
+    int tmp2 = 0;
+    int tmp3 = 0;
+    int tmp4 = 0;
+
+ 
     
+    string outFile = "new1.ppm";
     // Initialize output file name
-    int numFiles = 1;
-    string outFile = "new" + to_string(numFiles) + ".ppm";
+//    int numFiles = 1;
+//    string outFile = "new" + to_string(numFiles) + ".ppm";
     
     // Ask for string of input file 
     cout << "Enter string for PPM image file name to load: ";
@@ -103,21 +109,29 @@ int main(int argc, const char * argv[]) {
             cin >> patternFile;
             
             cout << "Enter upper left corner of pattern row: ";
+//            patternHeight = stoi(lineStr);
             cin >> lineStr;
-            patternHeight = stoi(lineStr);
+            iss.str(lineStr);
+            iss >> patternHeight;
+            iss.clear();
+
             
             cout << "Enter upper left corner of pattern column: ";
             cin >> lineStr;
-            patternWidth = stoi(lineStr);
+            iss.str(lineStr);
+            iss >> patternWidth;
+            iss.clear();
+            
             
             cout << "1.  Red" << endl << "2.  Green" << endl << "3.  Blue"
             << endl << "4.  Black" << endl << "5.  White" << endl;
             
             cout << "Enter int for pattern color: ";
             cin >> colorStr;
-            colorInt = stoi(colorStr);
+            iss.str(colorStr);
+            iss >> colorInt;
+            iss.clear();
             
-
             ImgModify ImgPattern(inputFile);
             ImgPattern.addPattern(patternFile, patternHeight,
                                   patternWidth, colorInt, outFile);
@@ -133,11 +147,16 @@ int main(int argc, const char * argv[]) {
             
             cout << "Enter upper left corner to insert image row: ";
             cin >> lineStr;
-            insertHeight = stoi(lineStr);
+//            insertHeight = stoi(lineStr);
+            iss.str(lineStr);
+            iss >> insertHeight;
+            iss.clear();
             
             cout << "Enter upper left corner to insert image column: ";
             cin >> lineStr;
-            insertWidth = stoi(lineStr);
+            iss.str(lineStr);
+            iss >> insertWidth;
+            iss.clear();
             
             cout << "1.  Red" << endl << "2.  Green" << endl << "3.  Blue"
             << endl << "4.  Black" << endl << "5.  White" << endl;
@@ -168,31 +187,47 @@ int main(int argc, const char * argv[]) {
             {
                 cout << "Enter upper left corner row: ";
                 cin >> upperLeft_0;
-                upperLeft[0] = stoi(upperLeft_0);
+                iss.str(upperLeft_0);
+                iss >> upperLeft[0];
+                iss.clear();
                 cout << "Enter upper left corner column: ";
                 cin >> upperLeft_1;
-                upperLeft[1] = stoi(upperLeft_1);
+                iss.str(upperLeft_1);
+                iss >> upperLeft[1];
+                iss.clear();
                 cout << "Enter lower right corner row: ";
                 cin >> lowerRight_0;
-                lowerRight[0] = stoi(lowerRight_0);
+                iss.str(lowerRight_0);
+                iss >> lowerRight[0];
+                iss.clear();
                 cout << "Enter lower right corner column : ";
                 cin >> lowerRight_1;
-                lowerRight[1] = stoi(lowerRight_1);
+                iss.str(lowerRight_1);
+                iss >> lowerRight[1];
+                iss.clear();
             }
             else if (method == METHOD_LEFT_DIMENSION)
             {
                 cout << "Enter upper left corner row: ";
                 cin >> upperLeft_0;
-                upperLeft[0] = stoi(upperLeft_0);
+                iss.str(upperLeft_0);
+                iss >> upperLeft[0];
+                iss.clear();
                 cout << "Enter upper left corner column: ";
                 cin >> upperLeft_1;
-                upperLeft[1] = stoi(upperLeft_1);
+                iss.str(upperLeft_1);
+                iss >> upperLeft[1];
+                iss.clear();
                 cout << "Enter int for number of rows: ";
                 cin >> upperLeft_0;
-                numHeight = stoi(upperLeft_0);
+                iss.str(upperLeft_0);
+                iss >> numHeight;
+                iss.clear();
                 cout << "Enter int for number of columns: ";
                 cin >> upperLeft_1;
-                numWidth = stoi(upperLeft_1);
+                iss.str(upperLeft_1);
+                iss >> numWidth;
+                iss.clear();
                 
                 lowerRight[0] = upperLeft[0] + numHeight;
                 lowerRight[1] = upperLeft[1] + numWidth;
@@ -202,17 +237,29 @@ int main(int argc, const char * argv[]) {
             {
                 cout << "Enter rectangle center row: ";
                 cin >> centerRow;
+                iss.str(centerRow);
+                iss >> tmp1;
+                iss.clear();
                 cout << "Enter rectangle center column: ";
                 cin >> centerCol;
+                iss.str(centerCol);
+                iss >> tmp2;
+                iss.clear();
                 cout << "Enter int for half number of rows: ";
                 cin >> halfRow;
+                iss.str(halfRow);
+                iss >> tmp3;
+                iss.clear();
                 cout << "Enter int for half number of columns: ";
                 cin >> halfCol;
+                iss.str(halfCol);
+                iss >> tmp4;
+                iss.clear();
                 
-                upperLeft[0] = stoi(centerRow) - stoi(halfRow);
-                upperLeft[1] = stoi(centerCol) - stoi(halfCol);
-                lowerRight[0] = stoi(centerRow) + stoi(halfRow);
-                lowerRight[1] = stoi(centerCol) + stoi(halfCol);
+                upperLeft[0] = tmp1 - tmp3;
+                lowerRight[0] = tmp1 + tmp3;
+                upperLeft[1] = tmp2 - tmp4;
+                lowerRight[1] = tmp2 + tmp4;
                 
             }
             
@@ -223,7 +270,9 @@ int main(int argc, const char * argv[]) {
             
             cout << "Enter int for rectangle color: ";
             cin >> colorStr;
-            colorInt = stoi(colorStr);
+            iss.str(colorStr);
+            iss >> colorInt;
+            iss.clear();
             
             cout << "1.  No" << endl << "2.  Yes" << endl;
             cout << "Enter int for rectangle fill option: ";
@@ -247,8 +296,8 @@ int main(int argc, const char * argv[]) {
         else if (choice == CHOICE_WRITE_CURRENT)
         {
             // Choice 4: Write out current image
-            numFiles += 1;
-            outFile = "new" + to_string(numFiles) + ".ppm";
+//            numFiles += 1;
+//            outFile = "new" + numFiles + ".ppm";
             cout << "Enter string for PPM file name to output: ";
             cin >> inputFile;
         }
