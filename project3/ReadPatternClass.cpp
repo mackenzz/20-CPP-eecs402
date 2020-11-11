@@ -17,6 +17,7 @@ using namespace std;
 
 string ** ReadPattern:: convertArray()
 {
+    patternArray = new string *[ARRAY_INITIIAL_HEIGHT];
     string patternHeightString;
     string patternWidthString;
     
