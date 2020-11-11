@@ -10,6 +10,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstring>
 #include "ImgLoadClass.h"
 #include "constants.h"
 using namespace std;
