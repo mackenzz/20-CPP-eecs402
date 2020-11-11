@@ -11,6 +11,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstring>
 #include "ImgModifyClass.h"
 #include "ImgLoadClass.h"
 #include "ImgOutputClass.h"
