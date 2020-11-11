@@ -15,11 +15,11 @@ ReadPatternClass.o: ReadPatternClass.cpp ReadPatternClass.h constants.h
 RectangleClass.o: RectangleClass.cpp RectangleClass.h constants.h
 	g++ -std=c++98 -Wall -c RectangleClass.cpp -o RectangleClass.o
 
-mainProj3.o: mainProj3.cpp ImgLoadClass.h ImgOutputClass.h ReadPatternClass.h ImgModifyClass.h ImgModifyClass.h constants.h
-	g++ -std=c++98 -Wall -c mainProj3.cpp -o mainProj3.o
+proj3.o: proj3.cpp ImgLoadClass.h ImgOutputClass.h ReadPatternClass.h ImgModifyClass.h ImgModifyClass.h constants.h
+	g++ -std=c++98 -Wall -c proj3.cpp -o proj3.o
 
 proj3.exe: ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o RectangleClass.o
-	g++ -std=c++98 -Wall -c mainProj3.o ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o RectangleClass.o -o proj3.exe
+	g++ -std=c++98 -Wall -c proj3.o ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o RectangleClass.o -o proj3.exe
 
 clean:
 	rm -f *.o *.exe
