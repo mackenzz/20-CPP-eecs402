@@ -21,8 +21,8 @@ class ReadPattern {
 private:
     string patternFile;
 public:
-    int heightPattern = 0;
-    int widthPattern = 0;
+    int heightPattern;
+    int widthPattern;
     string **patternArray = new string *[ARRAY_INITIIAL_HEIGHT];
     
     // Constructor
