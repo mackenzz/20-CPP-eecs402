@@ -11,6 +11,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstring>
 #include "constants.h"
 using namespace std;
 
