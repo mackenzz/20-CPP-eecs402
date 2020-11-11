@@ -22,7 +22,7 @@ string ** ReadPattern:: convertArray()
     string patternWidthString;
     
     ifstream inPatternFile;
-    inPatternFile.open(patternFile);
+    inPatternFile.open(patternFile.c_str());
     
     if (inPatternFile.fail())
     {
