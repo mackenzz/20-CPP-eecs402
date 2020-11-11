@@ -15,7 +15,7 @@ ImgOutputClass.o: ImgOutputClass.cpp ImgOutputClass.h ImgOutputClass.h
 ReadPatternClass.o: ReadPatternClass.cpp ReadPatternClass.h constants.h
 	g++ -std=c++98 -Wall -c ReadPatternClass.cpp -o ReadPatternClass.o
 
-proj3.exe: ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o RectangleClass.o
+proj3.exe: ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o RectangleClass.o proj3.o
 	g++ -std=c++98 -Wall -c proj3.o ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o -o proj3.exe
 
 clean:
