@@ -20,7 +20,7 @@ RectangleClass.o: RectangleClass.cpp RectangleClass.h constants.h
 	g++ -std=c++98 -Wall -c RectangleClass.cpp -o RectangleClass.o
 
 InputCheck.o: InputCheck.cpp InputCheck.h constants.h
-	g++ -std=c++98 -Wall -c InputCheck.cpp -o RInputCheck.o	
+	g++ -std=c++98 -Wall -c InputCheck.cpp -o InputCheck.o	
 
 proj3.exe: ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o proj3.o RectangleClass.o InputCheck.o
 	g++ -std=c++98 proj3.o ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o RectangleClass.o InputCheck.o -o proj3.exe
