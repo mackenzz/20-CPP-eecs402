@@ -20,7 +20,7 @@ RectangleClass.o: RectangleClass.cpp constants.h
 	g++ -std=c++98 -Wall -c RectangleClass.cpp -o RectangleClass.o
 
 proj3.exe: ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o proj3.o
-	g++ -std=c++98 proj3.o ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o -o proj3.exe
+	g++ -std=c++98 proj3.o ImgLoadClass.o ImgModifyClass.o ImgOutputClass.o ReadPatternClass.o RectangleClass.o -o proj3.exe
 
 clean:
 	rm -f *.o *.exe
