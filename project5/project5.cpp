@@ -57,18 +57,17 @@ int main(
   IntersectionSimulationClass simObj;
 
   //Check that user specified the necessary command line arg(s)..
-    /*
+    
   if (argc != 2)
   {
-      // need to modify " <parameterFile>"
-    cout << "Usage: " << argv[0] << " paramsA.txt" << endl;
+    cout << "Usage: " << argv[0] << " <parameterFile>" << endl;
     success = false;
   }
   else
   {
     specifiedParamFname = string(argv[1]);
   }
-    */
+    
 
     
 
