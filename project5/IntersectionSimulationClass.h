@@ -93,6 +93,11 @@ class IntersectionSimulationClass
     int northCurrTime;
     int southCurrTime;
     
+    void handleNextArriveEvent(
+                               double mean,
+                               double stdDev,
+                               string direction
+                               );
 
     
   public:
@@ -119,10 +124,10 @@ class IntersectionSimulationClass
       numTotalAdvancedSouth = 0;
         
       //Initialize with the first intervals
-      int eastCurrTime = 0;
-      int westCurrTime = 0;
-      int northCurrTime = 0;
-      int southCurrTime = 0;
+      eastCurrTime = 0;
+      westCurrTime = 0;
+      northCurrTime = 0;
+      southCurrTime = 0;
         
     }
 
