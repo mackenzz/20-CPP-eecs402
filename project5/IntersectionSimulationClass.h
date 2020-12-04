@@ -78,21 +78,20 @@ class IntersectionSimulationClass
     FIFOQueueClass< CarClass > southQueue; //South-bound queue of cars
 
     //Statistics-Related attributes
-    int maxEastQueueLength = 0;
-    int maxWestQueueLength = 0;
-    int maxNorthQueueLength = 0;
-    int maxSouthQueueLength = 0;
-    int numTotalAdvancedEast = 0;
-    int numTotalAdvancedWest = 0;
-    int numTotalAdvancedNorth = 0;
-    int numTotalAdvancedSouth = 0;
+    int maxEastQueueLength;
+    int maxWestQueueLength;
+    int maxNorthQueueLength;
+    int maxSouthQueueLength;
+    int numTotalAdvancedEast;
+    int numTotalAdvancedWest;
+    int numTotalAdvancedNorth;
+    int numTotalAdvancedSouth;
     
     //Note down last happen arrive time in four directions
-    //Initialize with the first intervals
-    int eastCurrTime = 0;
-    int westCurrTime = 0;
-    int northCurrTime = 0;
-    int southCurrTime = 0;
+    int eastCurrTime;
+    int westCurrTime;
+    int northCurrTime;
+    int southCurrTime;
     
 
     
@@ -118,6 +117,13 @@ class IntersectionSimulationClass
       numTotalAdvancedWest = 0;
       numTotalAdvancedNorth = 0;
       numTotalAdvancedSouth = 0;
+        
+      //Initialize with the first intervals
+      int eastCurrTime = 0;
+      int westCurrTime = 0;
+      int northCurrTime = 0;
+      int southCurrTime = 0;
+        
     }
 
     //Returns true if this simulation is ready to be executed, false otherwise.
@@ -201,6 +207,5 @@ class IntersectionSimulationClass
 };
 
 #endif // _INTERSECTIONSIMULATIONCLASS_H_
-
 
 
