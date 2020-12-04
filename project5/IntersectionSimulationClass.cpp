@@ -208,13 +208,15 @@ void IntersectionSimulationClass::scheduleArrival(
     // Add car arriving to Queue
     int arriveType = EVENT_UNKNOWN;
     int dirTime = 0;
-    string direction;
-    string car;
+//    string direction;
+//    string car;
+
 
     
     // Initialize start arrive time in each direction
     if (currentTime == START_TIME)
     {
+        cout << "Time: " << currentTime << " Scheduled ";
         eastCurrTime = getPositiveNormal(eastArrivalMean, eastArrivalStdDev);
         westCurrTime = getPositiveNormal(westArrivalMean, westArrivalStdDev);
         northCurrTime
@@ -223,31 +225,43 @@ void IntersectionSimulationClass::scheduleArrival(
                 = getPositiveNormal(southArrivalMean, southArrivalStdDev);
     }
     
-    // Initialize params for four directions
+
     if (travelDir == EAST_DIRECTION)
     {
         arriveType = EVENT_ARRIVE_EAST;
         dirTime = eastCurrTime;
+        
+
     }
     else if (travelDir == WEST_DIRECTION)
     {
+        
         arriveType = EVENT_ARRIVE_WEST;
         dirTime = westCurrTime;
+
+
     }
     else if (travelDir == NORTH_DIRECTION)
     {
+
         arriveType = EVENT_ARRIVE_NORTH;
         dirTime = northCurrTime;
+        
+
+
     }
-    else if (travelDir == SOUTH_DIRECTION)
+    else // if (travelDir == SOUTH_DIRECTION)
     {
+        
         arriveType = EVENT_ARRIVE_SOUTH;
         dirTime = southCurrTime;
+        
     }
 
     // Schedule an arrive event and insert into the eventList
     EventClass eventArrive = EventClass(dirTime, arriveType);
     eventList.insertValue(eventArrive);
+    cout << eventArrive << endl;
     
 }
 
@@ -259,72 +273,72 @@ void IntersectionSimulationClass::scheduleLightChange(
      )
 {
 //  cout << "THIS FUNCTION NEEDS TO BE IMPLEMENTED" << endl;
-    // Schedule what should be done during current statement
-    
-    // Initialize light change events
-    //  Light will start as a green light in the east-west direction
-    
+    cout << "Time: " << currentTime << " Scheduled ";
+    // Initialize the start time
     if (currentTime == START_TIME)
     {
+        currentTime += eastWestGreenTime;
+    }
+    
+    // Scheduel the event
+    if (currentLight == LIGHT_GREEN_EW)
+    {
+        // If current light is GREEN_EW, next event scheduled: YELLOW_EW
+        EventClass eventLightInit = EventClass(
+                                               currentTime,
+                                               EVENT_CHANGE_YELLOW_EW
+                                               );
+        eventList.insertValue(eventLightInit);
+        cout << eventLightInit << endl;
+        
+    }
+    
+    else if (currentLight == LIGHT_YELLOW_EW)
+    {
+        // If current light is YELLOW_EW, next event scheduled: GREEN_NS
+        EventClass eventLightInit = EventClass(
+                                               currentTime,
+                                               EVENT_CHANGE_GREEN_NS
+                                               );
+        eventList.insertValue(eventLightInit);
+        cout << eventLightInit << endl;
+    }
+    
+    else if (currentLight == LIGHT_GREEN_NS)
+    {
+        // If current light is GREEN_NS, next event scheduled: YELLOW_NS
+        EventClass eventLightInit = EventClass(
+                                               currentTime,
+                                               EVENT_CHANGE_YELLOW_NS
+                                               );
+        eventList.insertValue(eventLightInit);
+        cout << eventLightInit << endl;
+    }
+    
+    else if (currentLight == LIGHT_YELLOW_NS)
+    {
+        // If current light is YELLOW_EW, next event scheduled: GREEN_NS
         EventClass eventLightInit = EventClass(
                                                currentTime,
                                                EVENT_CHANGE_GREEN_EW
                                                );
+        
         eventList.insertValue(eventLightInit);
-        currentLight = LIGHT_GREEN_EW;
-
+        cout << eventLightInit << endl;
     }
     
-    else
-    {
-        // the if ... else ... needs modifify
-        if (currentLight == LIGHT_GREEN_EW)
-        {
-            // If current light is GREEN_EW, next event scheduled: YELLOW_EW
-            EventClass eventLightInit = EventClass(
-                                                   currentTime,
-                                                   EVENT_CHANGE_YELLOW_EW
-                                                   );
-            eventList.insertValue(eventLightInit);
-            
-        }
-        
-        else if (currentLight == LIGHT_YELLOW_EW)
-        {
-            // If current light is YELLOW_EW, next event scheduled: GREEN_NS
-            EventClass eventLightInit = EventClass(
-                                                   currentTime,
-                                                   EVENT_CHANGE_GREEN_NS
-                                                   );
-            eventList.insertValue(eventLightInit);
-            
-        }
-        
-        else if (currentLight == LIGHT_GREEN_NS)
-        {
-            // If current light is GREEN_NS, next event scheduled: YELLOW_NS
-            EventClass eventLightInit = EventClass(
-                                                   currentTime,
-                                                   EVENT_CHANGE_YELLOW_NS
-                                                   );
-            eventList.insertValue(eventLightInit);
-         
-        }
-        
-        else if (currentLight == LIGHT_YELLOW_NS)
-        {
-            // If current light is YELLOW_EW, next event scheduled: GREEN_NS
-            EventClass eventLightInit = EventClass(
-                                                   currentTime,
-                                                   EVENT_CHANGE_GREEN_EW
-                                                   );
-            eventList.insertValue(eventLightInit);
-            
-        }
-        
-    }
     
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -339,13 +353,11 @@ bool IntersectionSimulationClass::handleNextEvent(
 //    cout << "THIS FUNCTION NEEDS TO BE IMPLEMENTED" << endl;
 
     
-    
     // Arrange time interval in this function
     // different events are scheduled in between
-    int eventScheduleTime = START_TIME;
     int timeInterval;
-    int mean;
-    int stdDev;
+    double mean;
+    double stdDev;
     string direction;
     EventClass currEvent;
     bool isBeforeEndTime = true;
@@ -354,7 +366,7 @@ bool IntersectionSimulationClass::handleNextEvent(
     
     // The ealier event in a sorted list occurs at the front
     eventList.removeFront(currEvent);
-    eventScheduleTime = currEvent.getTimeOccurs();
+    cout << "\nHandling " << currEvent << endl;
     int currType = currEvent.getType();
     
     
@@ -369,44 +381,67 @@ bool IntersectionSimulationClass::handleNextEvent(
             mean = eastArrivalMean;
             stdDev = eastArrivalStdDev;
             direction = EAST_DIRECTION;
-            
             timeInterval = getPositiveNormal(mean, stdDev);
+            
+            CarClass car(direction, eastCurrTime + timeInterval);
+            eastQueue.enqueue(car);
+            cout << car << " - queue length: "
+                 << eastQueue.getNumElems() << endl;
+            
+            cout << "Time: " << eastCurrTime << " Scheduled ";
             eastCurrTime += timeInterval;
+            
+            
 
-            eastQueue.enqueue(CarClass(direction, eastCurrTime));
         }
         else if (currType == EVENT_ARRIVE_WEST)
         {
             mean = westArrivalMean;
             stdDev = westArrivalStdDev;
             direction = WEST_DIRECTION;
-            
             timeInterval = getPositiveNormal(mean, stdDev);
+            
+            CarClass car(direction, westCurrTime + timeInterval);
+            westQueue.enqueue(car);
+            cout << car << " - queue length: "
+            << westQueue.getNumElems() << endl;
+            
+            cout << "Time: " << westCurrTime << " Scheduled ";
             westCurrTime += timeInterval;
             
-            westQueue.enqueue(CarClass(direction, westCurrTime));
+            
         }
         else if (currType == EVENT_ARRIVE_NORTH)
         {
             mean = northArrivalMean;
             stdDev = northArrivalStdDev;
             direction = NORTH_DIRECTION;
-            
             timeInterval = getPositiveNormal(mean, stdDev);
+            
+            CarClass car(direction, northCurrTime);
+            northQueue.enqueue(car);
+            cout << car << " - queue length: "
+            << northQueue.getNumElems() << endl;
+            
+            cout << "Time: " << northCurrTime << " Scheduled ";
             northCurrTime += timeInterval;
             
-            northQueue.enqueue(CarClass(direction, northCurrTime));
         }
         else // if (currType == EVENT_ARRIVE_SOUTH)
         {
             mean = southArrivalMean;
             stdDev = southArrivalStdDev;
             direction = SOUTH_DIRECTION;
-            
             timeInterval = getPositiveNormal(mean, stdDev);
+            
+            CarClass car(direction, southCurrTime);
+            southQueue.enqueue(car);
+            cout << car << " - queue length: "
+            << southQueue.getNumElems() << endl;
+            
+            cout << "Time: " << southCurrTime << " Scheduled ";
             southCurrTime += timeInterval;
             
-            southQueue.enqueue(CarClass(direction, southCurrTime));
         }
         
         // Schedule next arrive event
@@ -673,23 +708,23 @@ bool IntersectionSimulationClass::handleNextEvent(
     
     
     
-    eventList.printForward();
-    cout << "eastQueue: ";
-//    eastQueue.print();
-    cout << eastQueue.getNumElems();
-    cout << endl;
-    cout << "westQueue: ";
-//    westQueue.print();
-    cout << westQueue.getNumElems();
-    cout << endl;
-    cout << "northQueue: ";
-//    northQueue.print();
-    cout << northQueue.getNumElems();
-    cout << endl;
-    cout << "southQueue: ";
-//    southQueue.print();
-    cout << southQueue.getNumElems();
-    cout << endl;
+//    eventList.printForward();
+//    cout << "eastQueue: ";
+////    eastQueue.print();
+//    cout << eastQueue.getNumElems();
+//    cout << endl;
+//    cout << "westQueue: ";
+////    westQueue.print();
+//    cout << westQueue.getNumElems();
+//    cout << endl;
+//    cout << "northQueue: ";
+////    northQueue.print();
+//    cout << northQueue.getNumElems();
+//    cout << endl;
+//    cout << "southQueue: ";
+////    southQueue.print();
+//    cout << southQueue.getNumElems();
+//    cout << endl;
     
     
     
@@ -703,6 +738,22 @@ bool IntersectionSimulationClass::handleNextEvent(
     
     return isBeforeEndTime;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -728,7 +779,6 @@ void IntersectionSimulationClass::printStatistics(
           numTotalAdvancedSouth << endl;
   cout << "===== End Simulation Statistics =====" << endl;
 }
-
 
 
 
