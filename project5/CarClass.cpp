@@ -11,10 +11,13 @@ ostream& operator<<(
      const CarClass &carToPrint
      )
 {
-    outStream << "Time: " << carToPrint.arrivalTime <<
-                 " Car #" << carToPrint.uniqueId <<
+    outStream << " Car #" << carToPrint.uniqueId <<
                  " arrives " << carToPrint.travelDir << "-bound";
 
+    /*
+     "Time: " << carToPrint.arrivalTime <<
+     */
+    
   return outStream;
 }
 
