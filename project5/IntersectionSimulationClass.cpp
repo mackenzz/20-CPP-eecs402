@@ -203,16 +203,9 @@ void IntersectionSimulationClass::scheduleArrival(
      const string &travelDir
      )
 {
-//  cout << "THIS FUNCTION NEEDS TO BE IMPLEMENTED" << endl;
-    
-    // Add car arriving to Queue
     int arriveType = EVENT_UNKNOWN;
     int dirTime = 0;
-//    string direction;
-//    string car;
 
-
-    
     // Initialize start arrive time in each direction
     if (currentTime == START_TIME)
     {
@@ -230,32 +223,21 @@ void IntersectionSimulationClass::scheduleArrival(
     {
         arriveType = EVENT_ARRIVE_EAST;
         dirTime = eastCurrTime;
-        
-
     }
     else if (travelDir == WEST_DIRECTION)
     {
-        
         arriveType = EVENT_ARRIVE_WEST;
         dirTime = westCurrTime;
-
-
     }
     else if (travelDir == NORTH_DIRECTION)
     {
-
         arriveType = EVENT_ARRIVE_NORTH;
         dirTime = northCurrTime;
-        
-
-
     }
     else // if (travelDir == SOUTH_DIRECTION)
     {
-        
         arriveType = EVENT_ARRIVE_SOUTH;
         dirTime = southCurrTime;
-        
     }
 
     // Schedule an arrive event and insert into the eventList
@@ -343,10 +325,6 @@ void IntersectionSimulationClass::scheduleLightChange(
 
 
 
-
-
-
-
 bool IntersectionSimulationClass::handleNextEvent(
      )
 {
@@ -383,6 +361,7 @@ bool IntersectionSimulationClass::handleNextEvent(
             direction = EAST_DIRECTION;
             timeInterval = getPositiveNormal(mean, stdDev);
             
+            cout << "Time: " << eastCurrTime;
             CarClass car(direction, eastCurrTime + timeInterval);
             eastQueue.enqueue(car);
             cout << car << " - queue length: "
@@ -401,6 +380,7 @@ bool IntersectionSimulationClass::handleNextEvent(
             direction = WEST_DIRECTION;
             timeInterval = getPositiveNormal(mean, stdDev);
             
+            cout << "Time: " << westCurrTime;
             CarClass car(direction, westCurrTime + timeInterval);
             westQueue.enqueue(car);
             cout << car << " - queue length: "
@@ -418,6 +398,7 @@ bool IntersectionSimulationClass::handleNextEvent(
             direction = NORTH_DIRECTION;
             timeInterval = getPositiveNormal(mean, stdDev);
             
+            cout << "Time: " << northCurrTime;
             CarClass car(direction, northCurrTime);
             northQueue.enqueue(car);
             cout << car << " - queue length: "
@@ -434,6 +415,7 @@ bool IntersectionSimulationClass::handleNextEvent(
             direction = SOUTH_DIRECTION;
             timeInterval = getPositiveNormal(mean, stdDev);
             
+            cout << "Time: " << southCurrTime;
             CarClass car(direction, southCurrTime);
             southQueue.enqueue(car);
             cout << car << " - queue length: "
@@ -546,7 +528,6 @@ bool IntersectionSimulationClass::handleNextEvent(
                 }
                 
                 westQueue.dequeue(outCar);
-//                westQueue.dequeue(CarClass());
                 numTotalAdvancedWest += 1;
             }
         }
@@ -748,19 +729,6 @@ bool IntersectionSimulationClass::handleNextEvent(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 void IntersectionSimulationClass::printStatistics(
      ) const
 {
@@ -779,6 +747,7 @@ void IntersectionSimulationClass::printStatistics(
           numTotalAdvancedSouth << endl;
   cout << "===== End Simulation Statistics =====" << endl;
 }
+
 
 
 
