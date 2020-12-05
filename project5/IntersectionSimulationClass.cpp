@@ -207,6 +207,7 @@ void IntersectionSimulationClass::scheduleArrival(
     int dirTime = 0;
     double mean;
     double stdDev;
+    int timeIntervalArrive = 0;
 
 
     if (travelDir == EAST_DIRECTION)
