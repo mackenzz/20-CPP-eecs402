@@ -58,7 +58,7 @@ int main(
 
   //Check that user specified the necessary command line arg(s)..
 
-    /*
+
   // Uncomment when using Cean lab
   if (argc != 2)
   {
@@ -69,7 +69,7 @@ int main(
   {
     specifiedParamFname = string(argv[1]);
   }
-*/
+
      
 
     
