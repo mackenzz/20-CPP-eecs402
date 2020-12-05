@@ -53,7 +53,7 @@ int main(
     */
     
   bool success = true;
-  string specifiedParamFname = "paramsA.txt";
+  string specifiedParamFname;
   IntersectionSimulationClass simObj;
 
   //Check that user specified the necessary command line arg(s)..
