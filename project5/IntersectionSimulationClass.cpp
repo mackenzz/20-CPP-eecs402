@@ -454,6 +454,8 @@ bool IntersectionSimulationClass::handleNextEvent(
                 }
                 
                 northQueue.dequeue(outCar);
+                cout << "Car #" << outCar.getId()
+                     << " advances north-bound" << endl;
                 numTotalAdvancedNorth += 1;
             }
         }
@@ -475,6 +477,8 @@ bool IntersectionSimulationClass::handleNextEvent(
                 }
                 
                 southQueue.dequeue(outCar);
+                cout << "Car #" << outCar.getId()
+                     << " advances south-bound" << endl;
                 numTotalAdvancedSouth += 1;
             }
         }
@@ -488,6 +492,7 @@ bool IntersectionSimulationClass::handleNextEvent(
     //**************** Light Change Event ****************
     else if (currType == EVENT_CHANGE_YELLOW_EW)
     {
+        cout << "Advancing cars on east-west green" << endl;
         // Advance cars in east direction during GREEN_EW
         currentTime += eastWestYellowTime;
         
@@ -507,6 +512,8 @@ bool IntersectionSimulationClass::handleNextEvent(
                 }
                 // outCar is used as place holder for deueue
                 eastQueue.dequeue(outCar);
+                cout << "Car #" << outCar.getId()
+                     << " advances east-bound" << endl;
                 numTotalAdvancedEast += 1;
                 
             }
@@ -528,6 +535,8 @@ bool IntersectionSimulationClass::handleNextEvent(
                 }
                 
                 westQueue.dequeue(outCar);
+                cout << "Car #" << outCar.getId()
+                     << "advances west-bound" << endl;
                 numTotalAdvancedWest += 1;
             }
         }
@@ -565,6 +574,8 @@ bool IntersectionSimulationClass::handleNextEvent(
                 if (randAdvanceYellow <= percentCarsAdvanceOnYellow)
                 {
                     northQueue.dequeue(outCar);
+                    cout << "Car #" << outCar.getId()
+                         << " advances north-bound" << endl;
                     numTotalAdvancedNorth += 1;
                 }
                 else
@@ -595,6 +606,8 @@ bool IntersectionSimulationClass::handleNextEvent(
                 if (randAdvanceYellow <= percentCarsAdvanceOnYellow)
                 {
                     southQueue.dequeue(outCar);
+                    cout << "Car #" << outCar.getId()
+                         << " advances south-bound" << endl;
                     numTotalAdvancedSouth += 1;
                 }
                 else
@@ -638,6 +651,8 @@ bool IntersectionSimulationClass::handleNextEvent(
                 if (randAdvanceYellow <= percentCarsAdvanceOnYellow)
                 {
                     eastQueue.dequeue(outCar);
+                    cout << "Car #" << outCar.getId()
+                         << " advances east-bound" << endl;
                     numTotalAdvancedEast += 1;
                 }
                 else
@@ -669,6 +684,8 @@ bool IntersectionSimulationClass::handleNextEvent(
                 if (randAdvanceYellow <= percentCarsAdvanceOnYellow)
                 {
                     westQueue.dequeue(outCar);
+                    cout << "Car #" << outCar.getId()
+                         << " advances west-bound" << endl;
                     numTotalAdvancedWest += 1;
                 }
                 else
@@ -747,7 +764,6 @@ void IntersectionSimulationClass::printStatistics(
           numTotalAdvancedSouth << endl;
   cout << "===== End Simulation Statistics =====" << endl;
 }
-
 
 
 
