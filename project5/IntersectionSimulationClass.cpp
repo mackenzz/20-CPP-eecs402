@@ -196,9 +196,7 @@ void IntersectionSimulationClass::printParameters() const
 
 
 
-
-
-
+// *******************************************
 void IntersectionSimulationClass::scheduleArrival(
      const string &travelDir
      )
@@ -265,21 +263,22 @@ void IntersectionSimulationClass::scheduleArrival(
 void IntersectionSimulationClass::scheduleLightChange(
      )
 {
-//  cout << "THIS FUNCTION NEEDS TO BE IMPLEMENTED" << endl;
-    
     cout << "Time: " << currentTime << " Scheduled ";
-
+    int eventType = EVENT_UNKNOWN;
+    
     // Scheduel the event
     if (currentLight == LIGHT_GREEN_EW)
     {
         // If current light is GREEN_EW, next event scheduled: YELLOW_EW
         currentTime += eastWestGreenTime;
-        EventClass eventLightInit = EventClass(
-                                               currentTime,
-                                               EVENT_CHANGE_YELLOW_EW
-                                               );
-        eventList.insertValue(eventLightInit);
-        cout << eventLightInit << endl;
+        eventType = EVENT_CHANGE_YELLOW_EW;
+        
+//        EventClass eventLightInit = EventClass(
+//                                               currentTime,
+//                                               EVENT_CHANGE_YELLOW_EW
+//                                               );
+//        eventList.insertValue(eventLightInit);
+//        cout << eventLightInit << endl;
         
     }
     
@@ -287,39 +286,51 @@ void IntersectionSimulationClass::scheduleLightChange(
     {
         // If current light is YELLOW_EW, next event scheduled: GREEN_NS
         currentTime += eastWestYellowTime;
-        EventClass eventLightInit = EventClass(
-                                               currentTime,
-                                               EVENT_CHANGE_GREEN_NS
-                                               );
-        eventList.insertValue(eventLightInit);
-        cout << eventLightInit << endl;
+        eventType = EVENT_CHANGE_GREEN_NS;
+        
+//        EventClass eventLightInit = EventClass(
+//                                               currentTime,
+//                                               EVENT_CHANGE_GREEN_NS
+//                                               );
+//        eventList.insertValue(eventLightInit);
+//        cout << eventLightInit << endl;
     }
     
     else if (currentLight == LIGHT_GREEN_NS)
     {
         // If current light is GREEN_NS, next event scheduled: YELLOW_NS
         currentTime += northSouthGreenTime;
-        EventClass eventLightInit = EventClass(
-                                               currentTime,
-                                               EVENT_CHANGE_YELLOW_NS
-                                               );
-        eventList.insertValue(eventLightInit);
-        cout << eventLightInit << endl;
+        eventType = EVENT_CHANGE_YELLOW_NS;
+        
+//        EventClass eventLightInit = EventClass(
+//                                               currentTime,
+//                                               EVENT_CHANGE_YELLOW_NS
+//                                               );
+//        eventList.insertValue(eventLightInit);
+//        cout << eventLightInit << endl;
     }
     
     else if (currentLight == LIGHT_YELLOW_NS)
     {
         // If current light is YELLOW_EW, next event scheduled: GREEN_NS
         currentTime += northSouthYellowTime;
-        EventClass eventLightInit = EventClass(
-                                               currentTime,
-                                               EVENT_CHANGE_GREEN_EW
-                                               );
+        eventType = EVENT_CHANGE_GREEN_EW;
         
-        eventList.insertValue(eventLightInit);
-        cout << eventLightInit << endl;
+//        EventClass eventLightInit = EventClass(
+//                                               currentTime,
+//                                               EVENT_CHANGE_GREEN_EW
+//                                               );
+//
+//        eventList.insertValue(eventLightInit);
+//        cout << eventLightInit << endl;
     }
     
+    EventClass eventLightInit = EventClass(
+                                           currentTime,
+                                           eventType
+                                           );
+    eventList.insertValue(eventLightInit);
+    cout << eventLightInit << endl;
     
 }
 
@@ -680,7 +691,7 @@ bool IntersectionSimulationClass::handleNextEvent(
                     break;
                 }
                 
-                randAdvanceYellow = getUniform(1, 100);
+                randAdvanceYellow = getUniform(UNIFORM_MIN, UNIFORM_MAX);
                 if (randAdvanceYellow <= percentCarsAdvanceOnYellow)
                 {
                     cout << "  Next east-bound car will advance on yellow\n";
@@ -818,6 +829,7 @@ void IntersectionSimulationClass::printStatistics(
           numTotalAdvancedSouth << endl;
   cout << "===== End Simulation Statistics =====" << endl;
 }
+
 
 
 
