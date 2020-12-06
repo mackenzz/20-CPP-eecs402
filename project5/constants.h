@@ -37,6 +37,9 @@ const int LIGHT_YELLOW_NS = 4;
 
 const int START_TIME = 0;
 
+const int UNIFORM_MIN = 1;
+const int UNIFORM_MAX = 100;
+
 
 
 #endif //_CONSTANTS_H_
