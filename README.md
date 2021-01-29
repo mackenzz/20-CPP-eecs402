@@ -1,2 +1,4 @@
 ### eecs402 C++ and Data Structure (linux)
-<img width="150" height="150" src="https://img-blog.csdn.net/20161028230559575"/></div>
+Project 3 implements an image editing program.  
+Project 4 is an implementation of Linked List, and based on which Porject 5 is coded.  
+Project 5 implements a traffic light model which includes random arriving processes and queuing processes.
